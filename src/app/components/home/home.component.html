@@ -1,50 +1,52 @@
-<div class="container">
-    <div class="alert alert-danger" *ngIf="errorMessage">
-        <strong>Error!</strong> {{errorMessage}}
-    </div>
-    <div class="alert alert-success" *ngIf="infoMessage">
-        <strong>Successful!</strong> {{infoMessage}}
-    </div>
-    <div class="course-container">
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col col-xs-6">
-                        <h3 class="panel-title">Fil d'actualité</h3>
-                    </div>
-                </div>
-            </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">description</th>
-                            <th scope="col">UserID</th>
-                            <th scope="col">Publish Date</th>
-                            <th scope="col">Like</th>
-                            <th scope="col">Detail</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of postList; index as ind">
-                            <th scope="row">{{ind + 1}}</th>
-                            <td>{{item.title}}</td>
-                            <td>{{item.description}}</td>
-                            <td>{{item.USER_ID}}</td>
-                            <td>{{item.date | date:"MMM d, y"}}</td>
-                            <td>
-                                <button class="btn btn-info" (click)="like(item)">Like</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-success" (click)="detail(item)">Detail</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+<div class="container">
+<div class="alert alert-danger" *ngIf="errorMessage">
+  <strong>Error!</strong> {{errorMessage}}
+</div>
+<div class="alert alert-success" *ngIf="infoMessage">
+  <strong>Successful!</strong> {{infoMessage}}
+</div>
+
+<div class="container" *ngIf="currentUser">
+  <div class="card">
+    <form action="" style="padding-top:15px;padding-left:20px ">
+      <div class="row">
+        <div class="col-auto mb-4 mb-md-0">
+          <p class="pt-2"><strong>Ecrire un blog</strong></p>
         </div>
+        <div class="col-md-5 col-12 mb-4 mb-md-0">
+          <div class="form-outline mb-4">
+            <input type="text" id="form5Example2" class="form-control" />
+            <input type="text" id="form5Example3" class="form-control" />
+          </div>
+        </div>
+        <div class="col-auto mb-4 mb-md-0">
+          <button type="submit" class="btn btn-primary mb-4">Poster</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+  <div class="container" *ngIf="!currentUser">
+    <p>S'inscrire  pour pouvoir intéragir avec votre réseau</p>
+
+  </div>
+
+
+<div *ngFor="let item of postList; index as ind">
+  <div class="container" style="padding-top: 10px">
+    <div class="card" style="width: 100%;background: #f7f7f7">
+
+      <div class="card-body">
+        <h6 class="card-title" style=""><i class="fa fa-user" style="font-size: 20px"></i>{{item.USER_ID}}</h6>
+        <h5 class="card-title" style="text-align: center">{{item.title}}</h5>
+        <p class="card-text">{{item.description}}</p>
+        <a href="#" class="btn btn-primary" style="float: left"><i class="fa fa-thumbs-up" (click)="like(item)"></i> Like</a>
+        <a href="#"style="color:black;float: left;padding-top: 5px;padding-left: 5px;text-decoration-line: underline" (click)="detail(item)">details</a>
+        <p style="float:right">{{item.date | date:"MMM d, y"}}</p>
+      </div>
     </div>
+  </div>
+</div>
 </div>
